@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una propuesta para Juan Serrano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #111110;
+    --ink-2: #3d3d3a;
+    --ink-3: #888780;
+    --paper: #faf9f7;
+    --paper-2: #f0ede8;
+    --accent: #1a1a1a;
+    --green: #1D9E75;
+    --green-light: #e8f5f0;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --max: 760px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--paper-2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 2.5rem;
+    animation: fadeIn 1s ease both;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    animation: fadeUp 0.9s ease both 0.1s;
+    max-width: 900px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--ink-2);
+    max-width: 540px;
+    animation: fadeUp 0.9s ease both 0.25s;
+    font-weight: 300;
+  }
+
+  .hero-scroll {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    animation: fadeIn 1.2s ease both 0.6s;
+  }
+
+  .hero-scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--ink-3);
+    transform-origin: left;
+    animation: lineGrow 1s ease both 0.8s;
+  }
+
+  .hero-number {
+    position: absolute;
+    top: clamp(2rem, 6vw, 5rem);
+    right: clamp(1.5rem, 6vw, 5rem);
+    font-family: var(--serif);
+    font-size: clamp(5rem, 14vw, 12rem);
+    color: var(--paper-2);
+    line-height: 1;
+    user-select: none;
+    animation: fadeIn 1.4s ease both 0.3s;
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 6vw, 3rem);
+  }
+
+  section {
+    padding: clamp(4rem, 10vw, 7rem) 0;
+    border-bottom: 1px solid var(--paper-2);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    margin-bottom: 1.2rem;
+    max-width: 640px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── PROBLEMA ─── */
+  .pull-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.3;
+    border-left: 2px solid var(--green);
+    padding-left: 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  /* ─── FLOW STEPS ─── */
+  .steps {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--paper-2);
+    align-items: start;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--paper-2);
+    line-height: 1;
+    font-style: italic;
+    user-select: none;
+  }
+
+  .step-content h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.01em;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight {
+    background: var(--green-light);
+    border-radius: 12px;
+    padding: 2rem 2.25rem;
+    margin: 2.5rem 0;
+    border-left: 3px solid var(--green);
+  }
+
+  .highlight p {
+    font-size: 0.95rem;
+    color: #085041;
+    margin-bottom: 0.5rem;
+    max-width: 100%;
+  }
+
+  .highlight p:last-child { margin-bottom: 0; }
+
+  /* ─── COSTS TABLE ─── */
+  .costs {
+    margin-top: 2.5rem;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .costs thead th {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .costs tbody tr {
+    border-bottom: 1px solid var(--paper-2);
+    transition: background 0.15s;
+  }
+
+  .costs tbody tr:hover { background: var(--paper-2); }
+
+  .costs td {
+    padding: 1rem 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    vertical-align: middle;
+  }
+
+  .costs td:last-child {
+    text-align: right;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .costs tfoot td {
+    padding: 1rem 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink);
+    border-top: 1px solid var(--ink);
+  }
+
+  .costs tfoot td:last-child {
+    color: var(--green);
+    text-align: right;
+  }
+
+  .tag-free {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ─── SETUP SESSION ─── */
+  .session-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--paper-2);
+    border: 1px solid var(--paper-2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+
+  .session-card {
+    background: var(--paper);
+    padding: 1.75rem;
+  }
+
+  .session-card h4 {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.75rem;
+  }
+
+  .session-card p {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 100%;
+    line-height: 1.6;
+  }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    padding: clamp(4rem, 10vw, 7rem) 0;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title em { font-style: italic; color: var(--green); }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: var(--ink-3);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 1rem 2.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-btn:hover {
+    background: var(--green);
+    transform: translateY(-1px);
+  }
+
+  .cta-note {
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2.5rem clamp(1.5rem, 6vw, 5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--paper-2);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    margin: 0;
+    max-width: 100%;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .session-grid { grid-template-columns: 1fr; }
+    .hero { justify-content: flex-end; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-number">01</div>
+  <p class="hero-label">Para Juan Serrano</p>
+  <h1 class="hero-title">Tu tiempo<br>vale más que<br><em>responder correos.</em></h1>
+  <p class="hero-sub">Una propuesta para automatizar tus cotizaciones, agenda y seguimiento, sin tocar nada de lo que ya funciona.</p>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Sigue leyendo
+  </div>
+</section>
+
+<!-- EL PROBLEMA -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">El problema real</p>
+      <h2 class="section-title">Pasaste el caos de Instagram<br>al correo. <em>El problema<br>sigue siendo el mismo.</em></h2>
+    </div>
+    <div class="reveal">
+      <p>Pedirle a tu audiencia que te escriba por correo fue un buen primer paso. Pero si cada solicitud llega como texto libre, tienes que leerla, ver qué falta, responder pidiendo más info, calcular el precio, escribir la cotización y agendar, todo a mano.</p>
+      <p>Con el crecimiento que traes, con De Cero al Everest y las marcas que ya te están buscando, ese proceso no escala. Cada cotización te quita tiempo que podrías estar tatuando, creando, o simplemente descansando.</p>
+    </div>
+    <blockquote class="pull-quote reveal">
+      "La automatización no es para las marcas grandes. Es para el creador que quiere dejar de ser su propio asistente."
+    </blockquote>
+  </div>
+</section>
+
+<!-- EL FLUJO -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">La solución</p>
+      <h2 class="section-title">Un flujo que trabaja<br>mientras tú <em>tatúas.</em></h2>
+      <p>El cliente llena un formulario cuidado, con todo lo que necesitas saber. A partir de ahí, el sistema hace el trabajo.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Formulario de cotización (Tally)</h3>
+          <p>Bonito, rápido, desde el celular. Nombre, idea, zona del cuerpo, tamaño, foto de referencia. Nada le falta porque el form no lo deja enviar sin completarlo.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>IA genera el borrador</h3>
+          <p>Con los datos del form, una IA redacta una cotización personalizada con tu tono y criterio de precios. Sin que abras el correo.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Tú apruebas desde Telegram</h3>
+          <p>Te llega el borrador por Telegram, lo revisas cuando tengas un momento, y con un tap se envía. Si quieres editar algo, lo editas. Si no, 10 segundos y listo.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>El cliente elige fecha y hora</h3>
+          <p>Si acepta, el sistema le muestra tu disponibilidad real en Google Calendar según el tamaño del tatuaje. El cliente pre-selecciona 3 opciones que le queden bien. Tú confirmas la que prefieras.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>Todo queda registrado</h3>
+          <p>Cada cliente, cotización, fecha y depósito queda en una hoja de Google Sheets. Tu pipeline de citas, siempre al día, sin hacer nada extra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM MOCKUP -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Así lo vería tu cliente</p>
+      <h2 class="section-title">El formulario,<br><em>no el típico de Google.</em></h2>
+      <p>Esto es lo que ve quien quiere cotizar. Limpio, rápido desde el celular, y estructurado para que a ti llegue todo lo que necesitas sin tener que pedirlo.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:2.5rem;">
+      <div style="background:#fff;border:1px solid #e8e5e0;border-radius:16px;padding:clamp(1.5rem,5vw,2.5rem);max-width:520px;margin:0 auto;box-shadow:0 2px 24px rgba(0,0,0,0.06);">
+
+        <!-- Progress -->
+        <div style="display:flex;gap:4px;margin-bottom:1.75rem;">
+          <div style="height:3px;flex:1;border-radius:2px;background:#1D9E75;"></div>
+          <div style="height:3px;flex:1;border-radius:2px;background:#1D9E75;"></div>
+          <div style="height:3px;flex:1;border-radius:2px;background:#1D9E75;"></div>
+          <div style="height:3px;flex:1;border-radius:2px;background:#e8e5e0;"></div>
+          <div style="height:3px;flex:1;border-radius:2px;background:#e8e5e0;"></div>
+        </div>
+
+        <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#888780;margin-bottom:0.4rem;max-width:100%;">serranosjuan.com/cotizar</p>
+        <h3 style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#111110;margin-bottom:0.4rem;font-weight:400;letter-spacing:-0.01em;">Solicitud de cotización</h3>
+        <p style="font-size:0.85rem;color:#888780;margin-bottom:1.75rem;max-width:100%;line-height:1.5;">Cuéntame sobre tu idea y te respondo con precio y disponibilidad en menos de 24 h.</p>
+
+        <!-- Campo 01 -->
+        <div style="margin-bottom:1.25rem;">
+          <p style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;margin-bottom:0.5rem;max-width:100%;">01 — Nombre y correo</p>
+          <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.65rem 0.9rem;font-size:0.85rem;color:#b4b2a9;margin-bottom:6px;">Tu nombre</div>
+          <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.65rem 0.9rem;font-size:0.85rem;color:#b4b2a9;">tu@correo.com</div>
+        </div>
+
+        <!-- Campo 02 -->
+        <div style="margin-bottom:1.25rem;">
+          <p style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;margin-bottom:0.5rem;max-width:100%;">02 — Idea de tatuaje</p>
+          <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.65rem 0.9rem;font-size:0.85rem;color:#b4b2a9;min-height:72px;line-height:1.5;">Ej: un lobo en estilo blackwork con luna llena de fondo...</div>
+        </div>
+
+        <!-- Campo 03 zona -->
+        <div style="margin-bottom:1.25rem;">
+          <p style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;margin-bottom:0.5rem;max-width:100%;">03 — Zona del cuerpo</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+            <div style="background:#e8f5f0;border:1px solid #1D9E75;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#085041;text-align:center;cursor:pointer;">Brazo / antebrazo</div>
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;">Pierna / pantorrilla</div>
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;">Espalda / pecho</div>
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;">Cuello / costilla</div>
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;">Mano / pie</div>
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;">Otro</div>
+          </div>
+        </div>
+
+        <!-- Campo 04 tamaño -->
+        <div style="margin-bottom:1.25rem;">
+          <p style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;margin-bottom:0.5rem;max-width:100%;">04 — Tamaño aproximado</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.7rem 0.5rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;line-height:1.4;">Pequeño<br><span style="font-size:10px;color:#b4b2a9;">hasta 5 cm</span></div>
+            <div style="background:#e8f5f0;border:1px solid #1D9E75;border-radius:8px;padding:0.7rem 0.5rem;font-size:0.82rem;color:#085041;text-align:center;cursor:pointer;line-height:1.4;">Mediano<br><span style="font-size:10px;color:#1D9E75;">5–15 cm</span></div>
+            <div style="background:#faf9f7;border:1px solid #e8e5e0;border-radius:8px;padding:0.7rem 0.5rem;font-size:0.82rem;color:#888780;text-align:center;cursor:pointer;line-height:1.4;">Grande<br><span style="font-size:10px;color:#b4b2a9;">+15 cm</span></div>
+          </div>
+        </div>
+
+        <!-- Campo 05 referencia -->
+        <div style="margin-bottom:1.75rem;">
+          <p style="font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;margin-bottom:0.5rem;max-width:100%;">05 — Imagen de referencia <span style="font-weight:400;color:#b4b2a9;text-transform:none;letter-spacing:0;">(opcional)</span></p>
+          <div style="border:1px dashed #d3d1c7;border-radius:8px;padding:1.25rem;text-align:center;color:#b4b2a9;font-size:0.82rem;cursor:pointer;line-height:1.5;">Arrastra una imagen o toca para subir</div>
+        </div>
+
+        <!-- Submit -->
+        <button style="width:100%;padding:0.85rem;background:#111110;color:#faf9f7;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;letter-spacing:0.02em;">Enviar solicitud</button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">El setup</p>
+      <h2 class="section-title">Una sesión.<br><em>Todo funcionando.</em></h2>
+      <p>Tu Gmail sigue siendo 100% tuyo. No necesito acceso permanente ni te pido contraseñas. Lo que hacemos es conectar las herramientas entre sí usando sus propias integraciones, tú las autorizas, tú las controlas.</p>
+    </div>
+
+    <div class="highlight reveal">
+      <p>La única cosa que haces tú: autorizar que Gmail pueda enviar desde el flujo automático. Son 2 clics, lo haces frente a mí, y quedas siendo el único dueño de tu cuenta en todo momento.</p>
+    </div>
+
+    <div class="session-grid reveal">
+      <div class="session-card">
+        <h4>Modalidad</h4>
+        <p>Virtual por Google Meet o presencial en Bogotá, como prefieras.</p>
+      </div>
+      <div class="session-card">
+        <h4>Duración</h4>
+        <p>45 a 60 minutos. Al terminar, todo está vivo.</p>
+      </div>
+      <div class="session-card">
+        <h4>Tu parte</h4>
+        <p>Autorizar Gmail, conectar tu Google Calendar, revisar el formulario antes de publicarlo.</p>
+      </div>
+      <div class="session-card">
+        <h4>Lo que te dejo</h4>
+        <p>Documentación simple en Notion para ajustar precios o disponibilidad sin depender de mí.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COSTOS -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Costos del stack</p>
+      <h2 class="section-title">Lo que pagas tú<br>directamente, <em>cada mes.</em></h2>
+      <p>Todas las herramientas son gratuitas o casi gratuitas. Aquí el desglose honesto:</p>
+    </div>
+
+    <table class="costs reveal">
+      <thead>
+        <tr>
+          <th>Herramienta</th>
+          <th style="text-align:right">Costo mensual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tally, formulario de cotización <span class="tag-free">gratis</span></td>
+          <td>$0</td>
+        </tr>
+        <tr>
+          <td>n8n self-hosted (automatización)</td>
+          <td>~$4–5 USD</td>
+        </tr>
+        <tr>
+          <td>Dominio para n8n (ej: juanserrano.store)</td>
+          <td>$0.98 USD/año</td>
+        </tr>
+        <tr>
+          <td>Google Sheets + Google Calendar <span class="tag-free">gratis</span></td>
+          <td>$0</td>
+        </tr>
+        <tr>
+          <td>Telegram Bot <span class="tag-free">gratis</span></td>
+          <td>$0</td>
+        </tr>
+        <tr>
+          <td>Claude API (IA para generar cotizaciones)</td>
+          <td>~$2–5 USD</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total mensual aproximado</td>
+          <td>~$7–10 USD/mes</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="cta-title">¿Te interesa?<br><em>Hablemos.</em></h2>
+      <p class="cta-sub">Si alguna parte de esto te llama la atención, respóndeme el correo y conversamos qué tiene sentido para ti. Ojalá que sí, me encanta el contenido que haces, me ha ayudado mucho.</p>
+      <a href="mailto:gonzalezpaublini@gmail.com?subject=Propuesta automatización cotizaciones" class="cta-btn">Responder al correo</a>
+      <p class="cta-note">Sin compromisos. Sin presentaciones largas.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Patricia González · Automatizaciones e IA</p>
+  <p>Hecho para Juan Serrano · 2026</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
